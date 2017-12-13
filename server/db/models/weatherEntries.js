@@ -8,20 +8,14 @@ const WeatherEntry = db.define('weatherEntry', {
   temp: {
     type: Sequelize.DECIMAL(12, 1)
   },
-  feelsLike: {
-    type: Sequelize.DECIMAL(12, 1)
-  },
-  relativeHumidity: {
+  humidity: {
     type: Sequelize.DECIMAL(12, 1)
   },
   pressure: {
     type: Sequelize.DECIMAL(12, 1)
   },
-  uvRating: {
+  cloudCover: {
     type: Sequelize.INTEGER
-  },
-  description: {
-    type: Sequelize.STRING
   }
 })
 
