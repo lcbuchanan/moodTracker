@@ -1,3 +1,7 @@
+'use strict';
+
+const { resolve } = require('path')
+
 module.exports = {
   entry: './app/index.jsx', // the starting point for our program
   output: {
@@ -13,10 +17,18 @@ module.exports = {
     loaders: [
       {
         test: /jsx?$/,
+        include: resolve(__dirname, './app'),
         loader: 'babel-loader',
         query: {
           presets: ['react', 'es2015']
         }
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader',
+        ]
       }
     ]
   }
