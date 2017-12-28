@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 /* -----------------    INITIAL STATE    ------------------ */
-//state.campuses:
+
 
 const initialState = false;
 
