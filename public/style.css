@@ -1,3 +1,20 @@
+
+.navbar{
+  display: flex;
+  justify-content: space-between;
+}
+
+#logo{
+  width: 80%;
+}
+
+.navbuttons{
+  width: 20%;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 1rem;
+}
+
 .loader {
     border: 16px solid #f3f3f3; /* Light grey */
     border-top: 16px solid #3498db; /* Blue */
@@ -26,4 +43,24 @@
 
 .infoBoxTitle{
   background-color: #e3e9f2;
+}
+
+.boxandtitle{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.displaybox{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.minidisplaybox{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-around;
 }

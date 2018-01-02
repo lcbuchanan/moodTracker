@@ -44,7 +44,7 @@ class MoodQuestion extends Component{
       .then(position => {
         console.log("coordinates: ", position.coords);
         const lat = position.coords.latitude;
-        const long = position.coords.latitude;
+        const long = position.coords.longitude;
         return axios.post('/api/weather', {
           lat,
           long,

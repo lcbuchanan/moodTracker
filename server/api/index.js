@@ -38,14 +38,28 @@ router.get('/mood/clouds', (req, res, next) => {
   .catch(next)
 })
 
+router.get('/mood/avg', (req, res, next) => {
+  return MoodEntry.findAll({
+    attributes: ['moodScore']
+  })
+  .then(scoreObjectArray => {
+    const scoreArray = scoreObjectArray.map((scoreObj) => scoreObj.moodScore);
+    console.log("SCORE ARRAY: ", scoreArray);
+    const avg = scoreArray.reduce((sum, currentVal) => sum + currentVal ) / (scoreArray.length);
+    res.json(avg);
+  })
+  .catch(next);
+})
+
 // creates a new mood entry and a new weather entry
 // returns the new mood entry, icluding weather entry id
 router.post('/weather/', (req, res, next) => {
-
+  console.log('LAT: ', req.body.lat);
+  console.log('LON: ', req.body.long);
   return axios.get(`http://api.openweathermap.org/data/2.5/weather?lat=${req.body.lat}&lon=${req.body.long}&appid=0498f49666ca0d738dbb8df32c79476f`)
   .then(weather => {
-    //console.log('response: ', weather)
     const tempKelvin = weather.data.main.temp;
+    console.log('tempKelvin: ', tempKelvin)
     const weatherInput = {
       humidity: weather.data.main.humidity,
       pressure: weather.data.main.pressure,

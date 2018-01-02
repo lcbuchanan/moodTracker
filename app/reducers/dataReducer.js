@@ -10,6 +10,8 @@ const LOAD_TEMP_DATA = 'LOAD_TEMP_DATA';
 
 const LOAD_CLOUD_DATA = 'LOAD_CLOUD_DATA';
 
+const LOAD_MOOD_AVG = 'LOAD_MOOD_AVG'
+
 /* ------------   ACTION CREATORS     ------------------ */
 
 
@@ -39,6 +41,13 @@ export const loadCloudData = (data) => {
   }
 }
 
+export const loadMoodAvg = (avg) => {
+  return {
+    type: LOAD_MOOD_AVG,
+    avg: +avg
+  }
+}
+
 /* ------------       REDUCER     ------------------ */
 
 
@@ -48,6 +57,8 @@ export default function reducer(state = initialState, action) {
       return action.data;
     case LOAD_CLOUD_DATA:
       return action.data;
+    case LOAD_MOOD_AVG:
+      return action.avg;
     default: return state;
   }
 }
@@ -65,5 +76,15 @@ export const fetchCloudData = () => dispatch => {
   axios.get('/api/mood/clouds')
   .then(res => res.data)
   .then(data => dispatch(loadCloudData(data)))
+  .catch(err => console.error(err));
+}
+
+export const fetchMoodAvg = () => dispatch => {
+  axios.get('/api/mood/avg')
+  .then(res => res.data)
+  .then(avg => {
+    console.log("AVERAGE: ", avg);
+    dispatch(loadMoodAvg(avg))
+  })
   .catch(err => console.error(err));
 }
