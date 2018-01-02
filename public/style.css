@@ -2,10 +2,14 @@
 .navbar{
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  background-color: #e0e0e0;
 }
 
 #logo{
   width: 80%;
+  font-family: 'Antic', sans-serif;
+  font-size: 4rem;
 }
 
 .navbuttons{
@@ -32,6 +36,7 @@
 .missionControlContainer{
   display: flex;
   justify-content: space-around;
+  padding: 2rem 0;
 }
 
 .infoBox{
@@ -62,5 +67,22 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
+
+  padding: 2rem 0;
+}
+
+.center-text-box{
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.graphlink{
+  padding: 1rem 0;
+}
+
+.moodForm{
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
 }

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 // import axios from 'axios';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { setLoadingFalse } from '../reducers/loadingReducer';
 import { fetchMoodAvg } from '../reducers/dataReducer';
+
 
 class MissionControl extends Component{
 
@@ -16,11 +18,11 @@ class MissionControl extends Component{
 
   render(){
     const moodAvg = this.props.data;
-    let iconSource;
-    this.props.moodScore > moodAvg ? iconSource = '.../public/images/up_arrow.svg.png' : iconSource = '.../public/images/down_arrow/svg.png';
+    let message;
+    this.props.moodScore > moodAvg ? message = 'your most recent mood entry is higher than your average!' : message = 'your most recent mood entry is lower than average for you';
 
     return (
-      <div>
+      <div className="center-text-box">
         <h1>Hello, Lori!</h1>
         <div className="missionControlContainer">
           <div className="infoBox">
@@ -32,10 +34,13 @@ class MissionControl extends Component{
           <div className="infoBox">
             <div className="infoBoxTitle">
               <p> most recent entry vs average:</p>
-              <img src={iconSource} />
             </div>
+            <p>{message}</p>
           </div>
         </div>
+        <Link to="/">
+          <button type="button" className="btn btn-default">enter a new mood score</button>
+        </Link>
       </div>
     )
   }

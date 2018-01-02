@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { ScatterChart, Scatter, CartesianGrid, XAxis, YAxis, Tooltip, Label} from 'recharts';
-import { fetchTempData } from '../reducers/dataReducer';
+import { fetchPressureData } from '../reducers/dataReducer';
 import WeatherGraphList from './WeatherGraphList';
 
-class Graph extends Component{
+class PressureGraph extends Component{
 
   constructor(){
     super();
@@ -25,11 +25,11 @@ class Graph extends Component{
         <h2 className="center-text-box">Mood vs. Temperature</h2>
         <div className="displaybox">
           <ScatterChart width={600} height={400} margin={{top: 20, right: 20, bottom: 20, left: 20}}>
-            <XAxis dataKey={'x'} type="number" name="temperature" unit="&deg; F"/>
-              <Label value="Temp &deg; F" offset={0} position="bottom" />
+            <XAxis dataKey={'x'} type="number" name="pressure" unit="mbar" domain={[1000, 1050]}/>
+              <Label value="Pressure mbar" offset={0} position="bottom" />
             <YAxis dataKey={'y'} type="number" name="mood" unit="" domain={[1, 5]}/>
             <CartesianGrid />
-            <Scatter name="A school" data={data} fill="#8499bc"/>
+            <Scatter name="A school" data={data} fill="#84bcad"/>
             <Tooltip cursor={{strokeDasharray: '3 3'}}/>
           </ScatterChart>
           <WeatherGraphList />
@@ -48,11 +48,11 @@ const mapStateToProps = state => {
  const mapDispatchToProps = dispatch => {
    return {
      getData: () => {
-       dispatch(fetchTempData());
+       dispatch(fetchPressureData());
      }
    }
  }
 
-const GraphContainer = connect(mapStateToProps, mapDispatchToProps)(Graph);
+const PressureGraphContainer = connect(mapStateToProps, mapDispatchToProps)(PressureGraph);
 
-export default GraphContainer;
+export default PressureGraphContainer;

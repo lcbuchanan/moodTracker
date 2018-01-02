@@ -16,6 +16,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //static middleware
+// app.use(express.static(path.join(__dirname, './path/to/static/assets')));
+
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.use('/api', apiRouter); // include our routes!

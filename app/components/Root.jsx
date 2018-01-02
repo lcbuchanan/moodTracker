@@ -5,6 +5,8 @@ import MissionControl from './MissionControl';
 import TempGraph from './TempGraph';
 import MoodCloudGraph from './MoodCloudsGraph';
 import GraphMenu from './GraphMenu';
+import MoodPressureGraph from './MoodPressure';
+import TimeGraph from './TimeGraph';
 
 
 export default class Root extends Component{
@@ -15,7 +17,7 @@ export default class Root extends Component{
         <div className="component-wrapper">
           <div className="navbar navbar-expand-lg navbar-light bg-light">
             <div id="logo">
-              <h2>MoodTracker</h2>
+              <p>MoodTracker</p>
             </div>
             <div className="navbuttons">
               <NavLink to="/graphs">
@@ -33,6 +35,8 @@ export default class Root extends Component{
               <Route exact path="/graphs" component={GraphMenu} />
               <Route exact path="/tempGraph" component={TempGraph} />
               <Route exact path="/cloudGraph" component={MoodCloudGraph} />
+              <Route exact path="/pressureGraph" component={MoodPressureGraph} />
+              <Route exact path="/timeGraph" component={TimeGraph} />
             </Switch>
           </div>
         </div>

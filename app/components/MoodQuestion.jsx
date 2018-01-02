@@ -68,45 +68,47 @@ class MoodQuestion extends Component{
             <h1 className="display-3">How ya feelin?</h1>
             <p className="lead"> Rate your general mood:</p>
             <form onSubmit={this.submitMood} >
+              <div className="moodForm">
               <div className="form-check-inline">
                 <label className="form-check-label">
+                  <div>1</div>
                   <input className="form-check-input" type="radio"
                     name="moodScore" id="moodRadios1" value="1"
                     onChange={this.handleOptionChange}/>
-                  1
                 </label>
               </div>
               <div className="form-check-inline">
                 <label className="form-check-label">
+                  <div>2</div>
                   <input className="form-check-input" type="radio"
                     name="moodScore" id="moodRadios2" value="2"
                     onChange={this.handleOptionChange} />
-                  2
                 </label>
               </div>
               <div className="form-check-inline">
                 <label className="form-check-label">
+                  <div>3</div>
                   <input className="form-check-input" type="radio"
                     name="moodScore" id="moodRadios3" value="3"
                     onChange={this.handleOptionChange} />
-                  3
                 </label>
               </div>
               <div className="form-check-inline">
                 <label className="form-check-label">
+                  <div>4</div>
                   <input className="form-check-input" type="radio"
                     name="moodScore" id="moodRadios4" value="4"
                     onChange={this.handleOptionChange} />
-                  4
                 </label>
               </div>
               <div className="form-check-inline">
                 <label className="form-check-label">
+                  <div>5</div>
                   <input className="form-check-input" type="radio"
                     name="moodScore" id="moodRadios5" value="5"
                     onChange={this.handleOptionChange} />
-                  5
                 </label>
+              </div>
               </div>
               <div>
                 <button type="submit" className="btn btn-default">submit</button>

@@ -12,29 +12,33 @@ export default function GraphMenu () {
           <div className="boxandtitle">
             <h4>weather</h4>
             <div className="minidisplaybox">
-              <Link to='/tempGraph'>
-                <button>temperature</button>
+              <Link to='/tempGraph' className="graphlink">
+                <button type="button" className="btn btn-default">temperature</button>
               </Link>
-              <Link to='/cloudGraph'>
-                <button>cloud cover</button>
+              <Link to='/cloudGraph' className="graphlink">
+                <button type="button" className="btn btn-default">cloud cover</button>
               </Link>
-              <button>pressure</button>
+              <Link to='/pressureGraph' className="graphlink">
+                <button type="button" className="btn btn-default">pressure</button>
+              </Link>
             </div>
           </div>
         <div className="boxandtitle">
           <h4>location</h4>
           <div className="minidisplaybox">
-            <button>place</button>
-            <button>elevation</button>
-            <button>distance to water</button>
+            <button type="button" className="btn btn-default">place</button>
+            <button type="button" className="btn btn-default">elevation</button>
+            <button type="button" className="btn btn-default">distance to water</button>
           </div>
         </div>
         <div className="boxandtitle">
           <h4>time</h4>
           <div className="minidisplaybox">
-            <button>day of the week</button>
-            <button>day of the month</button>
-            <button>general time graph</button>
+            <button type="button" className="btn btn-default">day of the week</button>
+            <button type="button" className="btn btn-default">day of the month</button>
+            <Link to="/timeGraph">
+              <button type="button" className="btn btn-default">general time graph</button>
+            </Link>
           </div>
         </div>
       </div>
