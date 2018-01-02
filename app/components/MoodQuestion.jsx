@@ -3,6 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { setLoadingTrue, setLoadingFalse } from '../reducers/loadingReducer';
+import { saveMoodScoreOnState } from '../reducers/moodScoreReducer';
 
 
 const PromisedLocation = require('promised-location');
@@ -12,7 +13,6 @@ class MoodQuestion extends Component{
   constructor() {
     super();
     this.state = {
-      moodScore: 0,
       fireRedirect: false
     }
     this.submitMood = this.submitMood.bind(this);
@@ -20,16 +20,11 @@ class MoodQuestion extends Component{
   }
 
   handleOptionChange(evt){
-    console.log("you selected: ", evt.target.value)
-    this.setState({
-      moodScore: +evt.target.value
-    })
+    this.props.setMoodScore(+evt.target.value)
   }
 
   submitMood(evt){
     evt.preventDefault();
-    console.log("you clicked submit!", this.state.moodScore);
-    console.log("startLoading type: ", setLoadingTrue);
     this.props.startLoading();
     //get latitude and longitude of location
     const options = {
@@ -42,17 +37,15 @@ class MoodQuestion extends Component{
 
     locator
       .then(position => {
-        console.log("coordinates: ", position.coords);
         const lat = position.coords.latitude;
         const long = position.coords.longitude;
         return axios.post('/api/weather', {
           lat,
           long,
-          moodScore: this.state.moodScore
+          moodScore: this.props.moodScore
         })
       })
       .then(res => {
-        console.log("post succeeded!", res)
         this.props.killLoading();
         this.setState({
           fireRedirect: true
@@ -133,7 +126,8 @@ class MoodQuestion extends Component{
 
 const mapStateToProps = state => {
   return {
-    loading: state.loading
+    loading: state.loading,
+    moodScore: state.moodScore
   }
 }
 
@@ -144,6 +138,9 @@ const mapDispatchToProps = dispatch => {
     },
     killLoading: () => {
       dispatch(setLoadingFalse())
+    },
+    setMoodScore: (moodScore) => {
+      dispatch(saveMoodScoreOnState(moodScore))
     }
   }
 }
