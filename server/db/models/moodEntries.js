@@ -13,6 +13,9 @@ const MoodEntry = db.define('moodEntry', {
       min: 1
     }
   },
+  day: {
+    type: Sequelize.INTEGER
+  }
 })
 
 module.exports = MoodEntry;

@@ -6,7 +6,9 @@ import TempGraph from './TempGraph';
 import MoodCloudGraph from './MoodCloudsGraph';
 import GraphMenu from './GraphMenu';
 import MoodPressureGraph from './MoodPressure';
-import TimeGraph from './TimeGraph';
+import HourGraph from './HourOfDayGraph';
+import MonthGraph from './MonthGraph';
+import DayGraph from './DayOfWeekGraph'
 
 
 export default class Root extends Component{
@@ -36,7 +38,9 @@ export default class Root extends Component{
               <Route exact path="/tempGraph" component={TempGraph} />
               <Route exact path="/cloudGraph" component={MoodCloudGraph} />
               <Route exact path="/pressureGraph" component={MoodPressureGraph} />
-              <Route exact path="/timeGraph" component={TimeGraph} />
+              <Route exact path="/monthGraph" component={MonthGraph} />
+              <Route exact path="/hourGraph" component={HourGraph} />
+              <Route exact path="/dayGraph" component={DayGraph} />
             </Switch>
           </div>
         </div>

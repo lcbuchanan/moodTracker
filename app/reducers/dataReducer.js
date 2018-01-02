@@ -14,17 +14,25 @@ const LOAD_PRESSURE_DATA = 'LOAD_PRESSURE_DATA';
 
 const LOAD_MOOD_AVG = 'LOAD_MOOD_AVG';
 
-const LOAD_TIME_DATA = 'LOAD_TIME_DATA';
+const LOAD_MONTH_DATA = 'LOAD_MONTH_DATA';
+
+const LOAD_HOUR_DATA = 'LOAD_HOUR_DATA';
+
+const LOAD_DAY_DATA = 'LOAD_DAY_DATA';
 
 /* ------------   ACTION CREATORS     ------------------ */
 
 
 export const loadTempData = (data) => {
+  console.log("DATA: ", data)
   const mappedData = data.map(entry => {
-    return {
-      x: +entry.temp,
-      y: +entry.moodEntry.moodScore
-    }
+    console.log("entry: ", entry.temp)
+
+      return {
+        x: +entry.temp,
+        y: +entry.moodEntry.moodScore
+      }
+
   })
   return {
     type: LOAD_TEMP_DATA,
@@ -65,15 +73,49 @@ export const loadMoodAvg = (avg) => {
   }
 }
 
-export const loadTimeData = (data) => {
+export const loadMonthData = (data) => {
   const mappedData = data.map(entry => {
+    // const year = entry.createdAt.slice(0, 4);
+    // const month = entry.createdAt.slice(5, 7);
+    const dayOfMonth = entry.createdAt.slice(8, 10);
     return {
-      x: +entry.createdAt,
+      x: +dayOfMonth,
       y: +entry.moodScore
     }
   })
   return {
-    type: LOAD_TIME_DATA,
+    type: LOAD_MONTH_DATA,
+    data: mappedData
+  }
+}
+
+export const loadHourData = (data) => {
+  const mappedData = data.map(entry => {
+    // const year = entry.createdAt.slice(0, 4);
+    // const month = entry.createdAt.slice(5, 7);
+    // const dayOfMonth = entry.createdAt.slice(8, 10);
+    const hourOfDay = entry.createdAt.slice(11, 13);
+    return {
+      x: +hourOfDay,
+      y: +entry.moodScore
+    }
+  })
+  return {
+    type: LOAD_HOUR_DATA,
+    data: mappedData
+  }
+}
+
+export const loadDayData = (data) => {
+  const mappedData = data.map(entry => {
+    // const dayNameArray = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    return {
+      x: +entry.day,
+      y: +entry.moodScore
+    }
+  })
+  return {
+    type: LOAD_DAY_DATA,
     data: mappedData
   }
 }
@@ -91,7 +133,11 @@ export default function reducer(state = initialState, action) {
       return action.data;
     case LOAD_MOOD_AVG:
       return action.avg;
-    case LOAD_TIME_DATA:
+    case LOAD_MONTH_DATA:
+      return action.data;
+    case LOAD_HOUR_DATA:
+      return action.data;
+    case LOAD_DAY_DATA:
       return action.data;
     default: return state;
   }
@@ -129,9 +175,23 @@ export const fetchMoodAvg = () => dispatch => {
   .catch(err => console.error(err));
 }
 
-export const fetchTimeData = () => dispatch => {
+export const fetchMonthData = () => dispatch => {
   axios.get('/api/mood/time')
   .then(res => res.data)
-  .then(data => dispatch(loadTimeData(data)))
+  .then(data => dispatch(loadMonthData(data)))
   .catch(err => console.error(err));
+}
+
+export const fetchHourData = () => dispatch => {
+  axios.get('/api/mood/time')
+  .then(res => res.data)
+  .then(data => dispatch(loadHourData(data)))
+  .catch(err => console.error(err));
+}
+
+export const fetchDayData = () => dispatch => {
+  axios.get('/api/mood/day')
+  .then(res => res.data)
+  .then(data => dispatch(loadDayData(data)))
+  .catch(err => console.error(err))
 }

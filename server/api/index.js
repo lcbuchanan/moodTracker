@@ -21,7 +21,9 @@ router.get('/mood/temp', (req, res, next) => {
     attributes: ['moodScore']
     }]
   })
-  .then(entries => res.json(entries))
+  .then(entries => {
+    res.json(entries)
+  })
   .catch(next)
 })
 
@@ -74,6 +76,16 @@ router.get('/mood/time', (req, res, next) => {
   .catch(next);
 })
 
+router.get('/mood/day', (req, res, next) => {
+  return MoodEntry.findAll({
+    attributes: ['moodScore', 'day']
+  })
+  .then(response => {
+    res.json(response);
+  })
+  .catch(next);
+})
+
 // creates a new mood entry and a new weather entry
 // returns the new mood entry, icluding weather entry id
 router.post('/weather/', (req, res, next) => {
@@ -87,15 +99,21 @@ router.post('/weather/', (req, res, next) => {
       temp: (9 / 5) * (tempKelvin - 273) + 32
     };
     return WeatherEntry.create(weatherInput)
-    .then(newWeatherEntry => {
-      return MoodEntry.create({
-        moodScore: req.body.moodScore
-      }).then(newMoodEntry => {
-        return newMoodEntry.setWeatherEntry(newWeatherEntry)
+  .then(newWeatherEntry => {
+    const theDate = new Date();
+    const dayOfWeek = theDate.getDay();
+    return MoodEntry.create({
+      moodScore: req.body.moodScore,
+      day: dayOfWeek
+    })
+    .then(newMoodEntry => {
+      return newMoodEntry.setWeatherEntry(newWeatherEntry)
       });
     })
   })
-  .then(newMoodEntry => res.status(201).json(newMoodEntry))
+  .then(newMoodEntry => {
+    res.status(201).json(newMoodEntry)
+  })
   .catch(next);
 });
 

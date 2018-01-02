@@ -34,10 +34,14 @@ export default function GraphMenu () {
         <div className="boxandtitle">
           <h4>time</h4>
           <div className="minidisplaybox">
-            <button type="button" className="btn btn-default">day of the week</button>
-            <button type="button" className="btn btn-default">day of the month</button>
-            <Link to="/timeGraph">
-              <button type="button" className="btn btn-default">general time graph</button>
+            <Link to="/dayGraph" className="graphlink">
+              <button type="button" className="btn btn-default">day of the week</button>
+            </Link>
+            <Link to="/monthGraph" className="graphlink">
+              <button type="button" className="btn btn-default">day of the month</button>
+            </Link>
+            <Link to="/hourGraph" className="graphlink">
+              <button type="button" className="btn btn-default">hour of the day</button>
             </Link>
           </div>
         </div>
